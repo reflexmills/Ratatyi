@@ -10,51 +10,67 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(-45deg, #ff3c00, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            height: 100vh;
             color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
         }
 
         .container {
             max-width: 100%;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
             object-fit: cover;
             border: 3px solid white;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 24px;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            padding: 0 10px;
+            margin-bottom: 30px;
         }
 
         .service {
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 12px;
             padding: 15px 10px;
-            backdrop-filter: blur(8px);
             transition: all 0.3s;
             cursor: pointer;
             text-decoration: none;
@@ -64,33 +80,116 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .service:hover {
-            transform: scale(1.05);
-            background-color: rgba(0, 0, 0, 0.6);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03);
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
         .service-icon {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
+            width: 30px;
+            height: 30px;
+            margin-bottom: 8px;
             border-radius: 50%;
             object-fit: contain;
         }
 
         .service-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
+        }
+
+        .player-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-title {
+            font-size: 18px;
+            margin-bottom: 20px;
             text-align: center;
+        }
+
+        .tracks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s;
+        }
+
+        .track:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .track-cover {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .track-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .track-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .track-duration {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .play-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
         .footer {
             margin-top: 30px;
             font-size: 12px;
             opacity: 0.7;
+        }
+
+        audio {
+            display: none;
         }
 
         @media (max-width: 400px) {
@@ -101,50 +200,64 @@
     </style>
 </head>
 <body>
+    <!-- Анимированный фон -->
+    <video autoplay muted loop class="video-background">
+        <source src="background.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видеофон
+    </video>
+    <div class="overlay"></div>
+
     <div class="container">
-        <img src="https://via.placeholder.com/100" alt="Рататуй" class="logo" id="logo">
+        <img src="logo.jpg" alt="Рататуй" class="logo">
         <h1>Рататуй | Музыка</h1>
         
         <div class="services-grid">
             <a href="https://t.me/ratatyimyz" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" class="service-icon">
-                <span class="service-name">Telegram канал</span>
+                <img src="icons/telegram.png" class="service-icon">
+                <span class="service-name">Telegram</span>
             </a>
             
             <a href="https://vk.com/ratatyimyz" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/2048px-VK.com-logo.svg.png" class="service-icon">
-                <span class="service-name">Сообщество VK</span>
+                <img src="icons/vk.png" class="service-icon">
+                <span class="service-name">VK Сообщество</span>
             </a>
             
-            <a href="https://music.yandex.ru/artist/20886480?utm_medium=copy_link" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Yandex_Music_icon.svg/2048px-Yandex_Music_icon.svg.png" class="service-icon">
-                <span class="service-name">Яндекс Музыка</span>
+            <a href="https://music.yandex.ru/artist/20886480" class="service" target="_blank">
+                <img src="icons/yandex.png" class="service-icon">
+                <span class="service-name">Яндекс</span>
             </a>
             
             <a href="https://vk.com/artist/2227469167115339691" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Music_logo.png/640px-VK_Music_logo.png" class="service-icon">
+                <img src="icons/vkmusic.png" class="service-icon">
                 <span class="service-name">VK Музыка</span>
             </a>
             
-            <a href="https://open.spotify.com/artist/28SlXUri55LKNUCqc40XX3?si=OTOHevVlToSDFOe4CrTBjA" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" class="service-icon">
+            <a href="https://open.spotify.com/artist/28SlXUri55LKNUCqc40XX3" class="service" target="_blank">
+                <img src="icons/spotify.png" class="service-icon">
                 <span class="service-name">Spotify</span>
             </a>
             
-            <a href="https://music.apple.com/us/artist/%D1%80%D0%B0%D1%82%D0%B0%D1%82%D1%83%D0%B9/1723605447" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Apple_Music_logo.svg/640px-Apple_Music_logo.svg.png" class="service-icon">
+            <a href="https://music.apple.com/us/artist/рататуй/1723605447" class="service" target="_blank">
+                <img src="icons/apple.png" class="service-icon">
                 <span class="service-name">Apple Music</span>
             </a>
             
             <a href="https://www.youtube.com/channel/UCcu_Fz0QaY25itjFIKhs-JQ" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/2048px-YouTube_social_white_square_%282017%29.svg.png" class="service-icon">
+                <img src="icons/youtube.png" class="service-icon">
                 <span class="service-name">YouTube</span>
             </a>
             
             <a href="https://zvuk.com/artist/212803657" class="service" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sberbank_Logo_2020.svg/1200px-Sberbank_Logo_2020.svg.png" class="service-icon">
+                <img src="icons/sber.png" class="service-icon">
                 <span class="service-name">СберЗвук</span>
             </a>
+        </div>
+        
+        <div class="player-section">
+            <div class="player-title">Последние треки</div>
+            <div class="tracks-container" id="tracks-container">
+                <!-- Треки будут добавлены через JavaScript -->
+            </div>
         </div>
         
         <div class="footer">
@@ -152,14 +265,116 @@
         </div>
     </div>
 
+    <!-- Аудио элементы -->
+    <audio id="audio-player"></audio>
+
     <script>
         // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
         tg.expand();
         tg.MainButton.hide();
         
-        // Можно заменить лого на ваше
-        // document.getElementById('logo').src = 'ваша_ссылка_на_лого.jpg';
+        // Ваши треки (добавьте свои)
+        const tracks = [
+            {
+                title: "Название трека 1",
+                cover: "covers/track1.jpg",
+                file: "music/track1.mp3",
+                duration: "2:45"
+            },
+            {
+                title: "Название трека 2",
+                cover: "covers/track2.jpg",
+                file: "music/track2.mp3",
+                duration: "3:12"
+            },
+            {
+                title: "Название трека 3",
+                cover: "covers/track3.jpg",
+                file: "music/track3.mp3",
+                duration: "2:58"
+            },
+            {
+                title: "Название трека 4",
+                cover: "covers/track4.jpg",
+                file: "music/track4.mp3",
+                duration: "3:30"
+            },
+            {
+                title: "Название трека 5",
+                cover: "covers/track5.jpg",
+                file: "music/track5.mp3",
+                duration: "4:05"
+            }
+        ];
+        
+        // Элементы плеера
+        const audioPlayer = document.getElementById('audio-player');
+        let currentTrackIndex = -1;
+        let isPlaying = false;
+        
+        // Отображение треков
+        function renderTracks() {
+            const container = document.getElementById('tracks-container');
+            container.innerHTML = '';
+            
+            tracks.forEach((track, index) => {
+                const trackElement = document.createElement('div');
+                trackElement.className = 'track';
+                trackElement.innerHTML = `
+                    <img src="${track.cover}" class="track-cover" alt="Обложка">
+                    <div class="track-info">
+                        <div class="track-title">${track.title}</div>
+                        <div class="track-duration">${track.duration}</div>
+                    </div>
+                    <button class="play-btn" data-index="${index}">▶</button>
+                `;
+                container.appendChild(trackElement);
+            });
+            
+            // Назначение обработчиков
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    togglePlay(index);
+                });
+            });
+        }
+        
+        // Воспроизведение/пауза
+        function togglePlay(index) {
+            if (currentTrackIndex === index && isPlaying) {
+                audioPlayer.pause();
+                isPlaying = false;
+                updatePlayButtons();
+            } else {
+                currentTrackIndex = index;
+                audioPlayer.src = tracks[index].file;
+                audioPlayer.play();
+                isPlaying = true;
+                updatePlayButtons();
+            }
+        }
+        
+        // Обновление кнопок воспроизведения
+        function updatePlayButtons() {
+            document.querySelectorAll('.play-btn').forEach((btn, index) => {
+                if (index === currentTrackIndex && isPlaying) {
+                    btn.textContent = '⏸';
+                } else {
+                    btn.textContent = '▶';
+                }
+            });
+        }
+        
+        // Обработчик окончания трека
+        audioPlayer.addEventListener('ended', function() {
+            isPlaying = false;
+            updatePlayButtons();
+        });
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', renderTracks);
     </script>
 </body>
-</html>
+    </html>
