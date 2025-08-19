@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Музыкальный переходник</title>
+    <title>Рататуй | Музыка</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #ff3c00, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             height: 100vh;
             color: white;
-            overflow-x: hidden;
         }
 
         @keyframes gradient {
@@ -25,10 +24,18 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 100%;
             padding: 20px;
             text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 3px solid white;
         }
 
         h1 {
@@ -36,157 +43,112 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 10px;
+        }
+
         .service {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px 10px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s;
             cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .service:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .service-icon {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            vertical-align: middle;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            object-fit: contain;
         }
 
         .service-name {
-            font-size: 18px;
-            font-weight: bold;
-            vertical-align: middle;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
         }
 
-        .player {
+        .footer {
             margin-top: 30px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            display: none;
+            font-size: 12px;
+            opacity: 0.7;
         }
 
-        .now-playing {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 5px;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-            margin: 15px 0;
-            cursor: pointer;
-        }
-
-        .progress {
-            height: 100%;
-            background-color: white;
-            border-radius: 5px;
-            width: 0%;
-        }
-
-        .search-container {
-            margin: 20px 0;
-        }
-
-        #search-input {
-            width: 80%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .search-results {
-            text-align: left;
-            max-height: 300px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .track {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-        }
-
-        .track:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        @media (max-width: 400px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Музыкальный переходник</h1>
+        <img src="https://via.placeholder.com/100" alt="Рататуй" class="logo" id="logo">
+        <h1>Рататуй | Музыка</h1>
         
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Поиск треков...">
+        <div class="services-grid">
+            <a href="https://t.me/ratatyimyz" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" class="service-icon">
+                <span class="service-name">Telegram канал</span>
+            </a>
+            
+            <a href="https://vk.com/ratatyimyz" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/2048px-VK.com-logo.svg.png" class="service-icon">
+                <span class="service-name">Сообщество VK</span>
+            </a>
+            
+            <a href="https://music.yandex.ru/artist/20886480?utm_medium=copy_link" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Yandex_Music_icon.svg/2048px-Yandex_Music_icon.svg.png" class="service-icon">
+                <span class="service-name">Яндекс Музыка</span>
+            </a>
+            
+            <a href="https://vk.com/artist/2227469167115339691" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Music_logo.png/640px-VK_Music_logo.png" class="service-icon">
+                <span class="service-name">VK Музыка</span>
+            </a>
+            
+            <a href="https://open.spotify.com/artist/28SlXUri55LKNUCqc40XX3?si=OTOHevVlToSDFOe4CrTBjA" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" class="service-icon">
+                <span class="service-name">Spotify</span>
+            </a>
+            
+            <a href="https://music.apple.com/us/artist/%D1%80%D0%B0%D1%82%D0%B0%D1%82%D1%83%D0%B9/1723605447" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Apple_Music_logo.svg/640px-Apple_Music_logo.svg.png" class="service-icon">
+                <span class="service-name">Apple Music</span>
+            </a>
+            
+            <a href="https://www.youtube.com/channel/UCcu_Fz0QaY25itjFIKhs-JQ" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/2048px-YouTube_social_white_square_%282017%29.svg.png" class="service-icon">
+                <span class="service-name">YouTube</span>
+            </a>
+            
+            <a href="https://zvuk.com/artist/212803657" class="service" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sberbank_Logo_2020.svg/1200px-Sberbank_Logo_2020.svg.png" class="service-icon">
+                <span class="service-name">СберЗвук</span>
+            </a>
         </div>
         
-        <div class="search-results" id="search-results"></div>
-        
-        <div class="service" onclick="selectService('youtube')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/2048px-YouTube_social_white_square_%282017%29.svg.png" class="service-icon">
-            <span class="service-name">YouTube</span>
-        </div>
-        
-        <div class="service" onclick="selectService('spotify')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" class="service-icon">
-            <span class="service-name">Spotify</span>
-        </div>
-        
-        <div class="service" onclick="selectService('apple')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png" class="service-icon">
-            <span class="service-name">Apple Music</span>
-        </div>
-        
-        <div class="service" onclick="selectService('yandex')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Yandex_Music_icon.svg/2048px-Yandex_Music_icon.svg.png" class="service-icon">
-            <span class="service-name">Яндекс Музыка</span>
-        </div>
-        
-        <div class="service" onclick="selectService('vk')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/VK.com-logo.svg/2048px-VK.com-logo.svg.png" class="service-icon">
-            <span class="service-name">VK Музыка</span>
-        </div>
-        
-        <div class="service" onclick="selectService('sber')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Sberbank_Logo_2020.svg/1200px-Sberbank_Logo_2020.svg.png" class="service-icon">
-            <span class="service-name">СберЗвук</span>
-        </div>
-        
-        <div class="player" id="player">
-            <div class="now-playing" id="now-playing">Сейчас играет: Не выбрано</div>
-            <div class="progress-container" onclick="seek(event)">
-                <div class="progress" id="progress"></div>
-            </div>
-            <div class="controls">
-                <button class="control-btn" onclick="prevTrack()">⏮</button>
-                <button class="control-btn" onclick="togglePlay()" id="play-btn">▶</button>
-                <button class="control-btn" onclick="nextTrack()">⏭</button>
-            </div>
+        <div class="footer">
+            Слушайте на всех платформах
         </div>
     </div>
 
@@ -194,164 +156,10 @@
         // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
         tg.expand();
+        tg.MainButton.hide();
         
-        // Текущий выбранный сервис
-        let currentService = null;
-        // Текущий плейлист
-        let currentPlaylist = [];
-        // Текущий трек
-        let currentTrackIndex = -1;
-        // Аудио элемент
-        const audio = new Audio();
-        // Таймер прогресса
-        let progressInterval;
-        
-        // Поиск треков
-        document.getElementById('search-input').addEventListener('input', function(e) {
-            const query = e.target.value.trim();
-            if (query.length > 2) {
-                searchTracks(query);
-            } else {
-                document.getElementById('search-results').style.display = 'none';
-            }
-        });
-        
-        // Поиск треков (заглушка)
-        function searchTracks(query) {
-            // Здесь должна быть реальная интеграция с API музыкальных сервисов
-            // Для демонстрации используем заглушку
-            
-            const results = [
-                { id: '1', title: 'Трек 1 - ' + query, artist: 'Исполнитель 1', service: 'youtube' },
-                { id: '2', title: 'Трек 2 - ' + query, artist: 'Исполнитель 2', service: 'spotify' },
-                { id: '3', title: 'Трек 3 - ' + query, artist: 'Исполнитель 3', service: 'apple' },
-                { id: '4', title: 'Трек 4 - ' + query, artist: 'Исполнитель 4', service: 'yandex' },
-                { id: '5', title: 'Трек 5 - ' + query, artist: 'Исполнитель 5', service: 'vk' },
-            ];
-            
-            displayResults(results);
-        }
-        
-        // Отображение результатов поиска
-        function displayResults(results) {
-            const resultsContainer = document.getElementById('search-results');
-            resultsContainer.innerHTML = '';
-            
-            results.forEach(track => {
-                const trackElement = document.createElement('div');
-                trackElement.className = 'track';
-                trackElement.innerHTML = `
-                    <strong>${track.title}</strong><br>
-                    <small>${track.artist} • ${getServiceName(track.service)}</small>
-                `;
-                trackElement.onclick = () => playTrack(track);
-                resultsContainer.appendChild(trackElement);
-            });
-            
-            resultsContainer.style.display = 'block';
-        }
-        
-        // Получение имени сервиса
-        function getServiceName(serviceId) {
-            const services = {
-                'youtube': 'YouTube',
-                'spotify': 'Spotify',
-                'apple': 'Apple Music',
-                'yandex': 'Яндекс Музыка',
-                'vk': 'VK Музыка',
-                'sber': 'СберЗвук'
-            };
-            return services[serviceId] || serviceId;
-        }
-        
-        // Выбор сервиса
-        function selectService(service) {
-            currentService = service;
-            document.getElementById('search-input').placeholder = `Поиск в ${getServiceName(service)}...`;
-            document.getElementById('search-input').focus();
-        }
-        
-        // Воспроизведение трека
-        function playTrack(track) {
-            document.getElementById('search-results').style.display = 'none';
-            document.getElementById('player').style.display = 'block';
-            
-            // Здесь должна быть реальная интеграция с API выбранного сервиса
-            // Для демонстрации используем заглушку
-            audio.src = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${Math.floor(Math.random() * 10) + 1}.mp3`;
-            
-            currentPlaylist = [track];
-            currentTrackIndex = 0;
-            
-            updateNowPlaying();
-            audio.play();
-            document.getElementById('play-btn').textContent = '⏸';
-            
-            // Запуск обновления прогресса
-            clearInterval(progressInterval);
-            progressInterval = setInterval(updateProgress, 1000);
-        }
-        
-        // Обновление информации о текущем треке
-        function updateNowPlaying() {
-            if (currentTrackIndex >= 0 && currentTrackIndex < currentPlaylist.length) {
-                const track = currentPlaylist[currentTrackIndex];
-                document.getElementById('now-playing').textContent = 
-                    `Сейчас играет: ${track.title} - ${track.artist} (${getServiceName(track.service)})`;
-            }
-        }
-        
-        // Обновление прогресса воспроизведения
-        function updateProgress() {
-            if (audio.duration) {
-                const progress = (audio.currentTime / audio.duration) * 100;
-                document.getElementById('progress').style.width = `${progress}%`;
-            }
-        }
-        
-        // Перемотка трека
-        function seek(event) {
-            const progressContainer = document.querySelector('.progress-container');
-            const rect = progressContainer.getBoundingClientRect();
-            const seekPosition = (event.clientX - rect.left) / rect.width;
-            audio.currentTime = audio.duration * seekPosition;
-        }
-        
-        // Переключение воспроизведения/паузы
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                document.getElementById('play-btn').textContent = '⏸';
-            } else {
-                audio.pause();
-                document.getElementById('play-btn').textContent = '▶';
-            }
-        }
-        
-        // Следующий трек
-        function nextTrack() {
-            if (currentPlaylist.length > 0) {
-                currentTrackIndex = (currentTrackIndex + 1) % currentPlaylist.length;
-                playTrack(currentPlaylist[currentTrackIndex]);
-            }
-        }
-        
-        // Предыдущий трек
-        function prevTrack() {
-            if (currentPlaylist.length > 0) {
-                currentTrackIndex = (currentTrackIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
-                playTrack(currentPlaylist[currentTrackIndex]);
-            }
-        }
-        
-        // Обработчики событий аудио
-        audio.addEventListener('ended', nextTrack);
-        audio.addEventListener('pause', () => {
-            document.getElementById('play-btn').textContent = '▶';
-        });
-        audio.addEventListener('play', () => {
-            document.getElementById('play-btn').textContent = '⏸';
-        });
+        // Можно заменить лого на ваше
+        // document.getElementById('logo').src = 'ваша_ссылка_на_лого.jpg';
     </script>
 </body>
 </html>
